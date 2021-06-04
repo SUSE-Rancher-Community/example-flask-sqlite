@@ -9,9 +9,11 @@ from database.database import init_app, init_db
 
 @pytest.fixture
 def app():
-    app = Flask(__name__, 
+    app = Flask(
+        __name__, 
         instance_relative_config=True, 
-        template_folder="../templates")
+        template_folder="../templates"
+        )
     app.config.from_mapping(
         DATABASE=os.path.join(app.instance_path, "shoppinglist.sqlite")
     )
@@ -48,3 +50,20 @@ def test_add_item(client):
     res = client.get("/")
     assert res.status_code == 200
     assert b'Bananas' in res.data
+
+def test_remove_item(client):
+    """When removing a previously added item, it should not be in the list afterwards."""
+
+    res = client.post('/addentry', data={"value": "Apples"})
+    assert res.status_code == 302
+
+    res = client.get("/")
+    assert res.status_code == 200
+    assert b'Apples' in res.data
+
+    res = client.post('/removeentry', data={"value": "Apples"})
+    assert res.status_code == 302
+
+    res = client.get("/")
+    assert res.status_code == 200
+    assert b'Apples' not in res.data
