@@ -14,7 +14,7 @@ RUN pip3 install -r requirements.txt
 COPY database /app/database
 COPY handlers /app/handlers
 COPY templates /app/templates
-COPY instance /app/instance
+
 COPY app.py /app/app.py
 COPY schema.sql /app/schema.sql
 
