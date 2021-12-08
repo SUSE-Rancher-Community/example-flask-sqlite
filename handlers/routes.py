@@ -36,6 +36,7 @@ def configure_routes(app):
         db.execute(
             "DELETE FROM shoppinglist WHERE item = ?",
             (item) # change this to (item,) <- the comma is what matters - don't ask me why...
+            #(item,) # change this to (item,) <- the comma is what matters - don't ask me why...
         )
         db.commit()
         return redirect("/", code=302)
