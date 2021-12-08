@@ -35,7 +35,6 @@ def configure_routes(app):
         db = get_db()
         db.execute(
             "DELETE FROM shoppinglist WHERE item = ?",
-            #(item) # change this to (item,) <- the comma is what matters - don't ask me why...
             (item,) # change this to (item,) <- the comma is what matters - don't ask me why...
         )
         db.commit()
