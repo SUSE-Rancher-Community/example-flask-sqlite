@@ -45,7 +45,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ secrets.DOCKER_HUB_USERNAME }}/flask-pytest-example:latest
+          tags: docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/flask-pytest-example:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
